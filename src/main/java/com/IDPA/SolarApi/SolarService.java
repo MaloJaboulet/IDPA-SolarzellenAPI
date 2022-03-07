@@ -10,7 +10,6 @@ public class SolarService {
     @GET
     @Path("power")
     @Produces(MediaType.APPLICATION_JSON)
-
     public Response readDeal(
             @QueryParam("wetter") int wetter,
             @QueryParam("zeit") int zeit,
@@ -20,11 +19,14 @@ public class SolarService {
         int httpStatus = 200;
         int power = 0;
 
-        System.out.println(wetter);
-        System.out.println(zeit);
-        System.out.println(winkel);
-        System.out.println(anzahl);
+        if (wetter == 0 && zeit == 0 && winkel == 0 && anzahl == 0){
+            wetter = 1;
+            zeit = 800;
+            winkel = 20;
+            anzahl = 10;
+        }
 
+        power = ((wetter * zeit) / winkel) * anzahl;
         return Response
                 .status(httpStatus)
                 .entity(power)
