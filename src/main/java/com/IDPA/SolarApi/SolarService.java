@@ -11,22 +11,34 @@ public class SolarService {
     @Path("power")
     @Produces(MediaType.APPLICATION_JSON)
     public Response readDeal(
-            @QueryParam("wetter") int wetter,
-            @QueryParam("zeit") int zeit,
-            @QueryParam("winkel") int winkel,
-            @QueryParam("anzahl") int anzahl
+            @QueryParam("wetter") String wetter,
+            @QueryParam("zeit") String zeit,
+            @QueryParam("winkel") String winkel,
+            @QueryParam("anzahl") String anzahl
     ) {
         int httpStatus = 200;
         int power = 0;
 
-        if (wetter == 0 && zeit == 0 && winkel == 0 && anzahl == 0){
-            wetter = 1;
-            zeit = 800;
-            winkel = 20;
-            anzahl = 10;
-        }
+        try {
+            int wetterZ = Integer.parseInt(wetter);
+            int zeitZ = Integer.parseInt(zeit);
+            int winkelZ = Integer.parseInt(winkel);
+            int anzahlZ = Integer.parseInt(anzahl);
 
-        power = ((wetter * zeit) / winkel) * anzahl;
+
+
+            if (wetterZ == 0 && zeitZ == 0 && winkelZ == 0 && anzahlZ == 0) {
+                wetterZ = 1;
+                zeitZ = 800;
+                winkelZ = 20;
+                anzahlZ = 10;
+            }
+
+            power = ((wetterZ * zeitZ) / winkelZ) * anzahlZ;
+
+        }catch (NumberFormatException exception){
+            httpStatus = 415;
+        }
         return Response
                 .status(httpStatus)
                 .entity(power)
