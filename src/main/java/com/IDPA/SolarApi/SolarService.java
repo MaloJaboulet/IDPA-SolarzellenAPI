@@ -20,6 +20,10 @@ public class SolarService {
         int httpStatus = 200;
         int power = 0;
 
+        System.out.println(wetter);
+        System.out.println(zeit);
+        System.out.println(winkel);
+        System.out.println(anzahl);
 
         return Response
                 .status(httpStatus)
