@@ -26,7 +26,7 @@ public class SolarService {
             @QueryParam("anzahl") String anzahlS
     ) {
         int httpStatus = 200;
-        double power = 0;
+        double power = -1;
         //Ertrag für Frühling, Sommer, Herbst und Winter in kWh/d/m^2
         final double[] ertragJahreszeit = {4, 5, 2.5, 1.5};
         final double panelGroesse = 1.7;            //1.7 m^2 grosse Panel
@@ -53,8 +53,8 @@ public class SolarService {
 
                 double groesse = anzahl / panelGroesse;
 
-                double einfallswinkelSonne = Math.toRadians(jahreszeitWinkel[jahreszeit - 1]);
-                double winkelErtrag = Math.sin((180 - einfallswinkelSonne - winkel));
+                double radian = Math.toRadians((180 - jahreszeitWinkel[jahreszeit - 1] - winkel));
+                double winkelErtrag = Math.sin(radian);
 
 
                 power = ertragJahreszeit[jahreszeit - 1] * wetterFaktor[wetter - 1] * groesse * winkelErtrag;
