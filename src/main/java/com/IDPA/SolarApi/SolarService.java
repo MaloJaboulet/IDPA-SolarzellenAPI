@@ -44,10 +44,16 @@ public class SolarService {
             if ((wetter <= 4 && wetter >= 0) && (jahreszeit <= 4 && jahreszeit >= 0) &&
                     (winkel <= 90 && winkel >= 0) && (anzahl <= 100 && anzahl >= 0)) {
 
-                if (wetter == 0 && jahreszeit == 0 && winkel == 0 && anzahl == 0) {
+                if (wetter == 0) {
                     wetter = 1;
+                }
+                if (jahreszeit == 0 ) {
                     jahreszeit = 1;
+                }
+                if (winkel == 0) {
                     winkel = 20;
+                }
+                if (anzahl == 0) {
                     anzahl = 10;
                 }
 
