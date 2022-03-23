@@ -64,6 +64,7 @@ public class SolarService {
 
 
                 power = ertragJahreszeit[jahreszeit - 1] * wetterFaktor[wetter - 1] * groesse * winkelErtrag;
+                power = (double) Math.round(power*100)/100;
             }
 
         } catch (NumberFormatException exception) {
