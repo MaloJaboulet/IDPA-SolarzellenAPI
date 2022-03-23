@@ -25,7 +25,7 @@ public class SolarService {
             @QueryParam("winkel") String winkelS,
             @QueryParam("anzahl") String anzahlS
     ) {
-        int httpStatus = 200;
+        int httpStatus = 415;
         double power = -1;
         //Ertrag für Frühling, Sommer, Herbst und Winter in kWh/d/m^2
         final double[] ertragJahreszeit = {4, 5, 2.5, 1.5};
@@ -65,6 +65,7 @@ public class SolarService {
 
                 power = ertragJahreszeit[jahreszeit - 1] * wetterFaktor[wetter - 1] * groesse * winkelErtrag;
                 power = (double) Math.round(power*100)/100;
+                httpStatus = 200;
             }
 
         } catch (NumberFormatException exception) {
