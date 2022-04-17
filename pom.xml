@@ -35,6 +35,11 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+        <!--<dependency>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot</artifactId>
+            <version>4.1.67.Final</version>
+        </dependency>-->
     </dependencies>
 
     <build>

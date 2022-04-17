@@ -16,10 +16,19 @@ import javax.ws.rs.core.Response;
 @Path("solar")
 public class SolarService {
 
+    /**
+     * Die Methode nimmt die vier Parameter an und rechnet damit die Leistung aus.
+     *
+     * @param wetterS     Das Wetter
+     * @param jahreszeitS Die Jahreszeit
+     * @param winkelS     Der Winkel
+     * @param anzahlS     Die Anzahl Solarpanels
+     * @return die Leistung
+     */
     @GET
     @Path("power")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response readDeal(
+    public Response getPower(
             @QueryParam("wetter") String wetterS,
             @QueryParam("jahreszeit") String jahreszeitS,
             @QueryParam("winkel") String winkelS,
@@ -47,7 +56,7 @@ public class SolarService {
                 if (wetter == 0) {
                     wetter = 1;
                 }
-                if (jahreszeit == 0 ) {
+                if (jahreszeit == 0) {
                     jahreszeit = 1;
                 }
                 if (winkel == 0) {
@@ -64,7 +73,7 @@ public class SolarService {
 
 
                 power = ertragJahreszeit[jahreszeit - 1] * wetterFaktor[wetter - 1] * groesse * winkelErtrag;
-                power = (double) Math.round(power*100)/100;
+                power = (double) Math.round(power * 100) / 100;
                 httpStatus = 200;
             }
 
@@ -74,6 +83,7 @@ public class SolarService {
         }
         return Response
                 .status(httpStatus)
+                .header("Access-Control-Allow-Origin", "*")
                 .entity(power)
                 .build();
     }

@@ -16,7 +16,10 @@ import java.util.Set;
 @ApplicationPath("/data")
 public class Config extends Application {
 
-
+    /**
+     * Definiert alle Service-Klassen
+     * @return
+     */
     @Override
     public Set<Class<?>> getClasses() {
         HashSet providers = new HashSet<Class<?>>();
